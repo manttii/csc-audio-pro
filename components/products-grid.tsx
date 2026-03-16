@@ -4,9 +4,9 @@ import { ArrowRight } from 'lucide-react'
 const products = [
   {
     name:        'Cello Series',
-    tagline:     'Precision Line Array',
+    tagline:     'Loudspeaker Excellence',
     description:
-      'Compact, ultra-high output line-array modules engineered for mid-size venues, touring rigs, and architectural installs. Remarkably coherent dispersion at any throw distance.',
+      'Acoustically transparent, tonally rich, and spatially neutral loudspeakers engineered for powerful performance.',
     specs: [
       { label: 'Max SPL',     value: '139 dB' },
       { label: 'LF Driver',   value: '2× 8″'  },
@@ -18,13 +18,13 @@ const products = [
   },
   {
     name:        'Contrabass Series',
-    tagline:     'Extreme Bass Module',
+    tagline:     'Premium Subwoofers',
     description:
-      'Dual-18″ cardioid subwoofers delivering earth-shaking low end with surgical precision. Variable cardioid configuration eliminates stage bleed for unmatched gain-before-feedback.',
+      'Deep, impactful subwoofers capturing bold and dynamic characteristics. Available in Reflex, Multiload, or band pass.',
     specs: [
       { label: 'Max SPL',     value: '143 dB' },
       { label: 'LF Driver',   value: '2× 18″' },
-      { label: 'Config',      value: 'Cardioid' },
+      { label: 'Config',      value: 'Flexible' },
     ],
     image:       '/images/contrabass-series.jpg',
     accent:      'accent',     // blue
@@ -32,17 +32,31 @@ const products = [
   },
   {
     name:        'Harp Series',
-    tagline:     'Reference Home Theater',
+    tagline:     'Ceiling Speaker Solution',
     description:
-      'Architectural loudspeakers crafted for high-end residential spaces. Audiophile-grade crossovers, custom ribbon tweeters, and cabinet damping that achieves studio-monitor accuracy.',
+      'Premium ceiling speakers with a dedicated second-order crossover, capturing delicate, clear, and gentle notes.',
     specs: [
       { label: 'Range',       value: '28Hz – 40kHz' },
-      { label: 'Tweeter',     value: 'AMT Ribbon' },
-      { label: 'Sensitivity', value: '92 dB/W/m' },
+      { label: 'Tweeter',     value: 'Custom Design' },
+      { label: 'Crossover',   value: '2nd Order' },
     ],
     image:       '/images/harp-series.jpg',
     accent:      'primary',
-    badge:       'Flagship',
+    badge:       'Premium',
+  },
+  {
+    name:        'String Series',
+    tagline:     'Satellite Speakers',
+    description:
+      'Robust small satellite speakers designed to deliver harmonious & balanced sound.',
+    specs: [
+      { label: 'Max SPL',     value: '135 dB' },
+      { label: 'Compact',     value: 'Design' },
+      { label: 'Application', value: 'Versatile' },
+    ],
+    image:       '/images/string-series.jpg',
+    accent:      'accent',
+    badge:       'Latest',
   },
 ]
 
@@ -85,7 +99,7 @@ export default function ProductsGrid() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => {
             const isAccent = product.accent === 'accent'
             const glowColor = isAccent

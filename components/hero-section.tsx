@@ -64,8 +64,7 @@ export default function HeroSection() {
 
           {/* Sub */}
           <p className="text-muted-foreground text-lg leading-relaxed max-w-md text-pretty">
-            High-Performance Pro-Audio Systems for Mission-Critical Venues. Engineered for
-            concert halls, live events, and bespoke home theaters.
+            Celebrating two decades of Trust. At CSC, we are driven by a deep passion for sound. Our German design team thrives on innovation, crafting professional audio products that deliver high performance and reliability for mission-critical venues.
           </p>
 
           {/* CTA row */}

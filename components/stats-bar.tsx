@@ -1,21 +1,27 @@
 const stats = [
   {
-    value:   '20',
-    unit:    'Years',
-    label:   'Of Trust',
-    detail:  'Delivering world-class audio since 2004',
-  },
-  {
     value:   '50+',
     unit:    'Products',
     label:   'In Our Range',
-    detail:  'Line arrays, subs, amplifiers & processors',
+    detail:  'Comprehensive audio solutions for every application',
+  },
+  {
+    value:   '3',
+    unit:    'Patents',
+    label:   'Product Innovation',
+    detail:  'Groundbreaking audio engineering & design',
   },
   {
     value:   '2000+',
     unit:    'Installations',
     label:   'Large-Scale Venues',
-    detail:  'Stadiums, arenas, theaters & luxury residences',
+    detail:  'Deployed across stadiums, arenas, and theaters worldwide',
+  },
+  {
+    value:   '15+',
+    unit:    'Countries',
+    label:   'Global Reach',
+    detail:  'Trusted by venues on every continent',
   },
 ]
 
@@ -37,7 +43,7 @@ export default function StatsBar() {
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[oklch(0.20_0_0)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[oklch(0.20_0_0)]">
           {stats.map((stat, i) => (
             <div
               key={stat.value}

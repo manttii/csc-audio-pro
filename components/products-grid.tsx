@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Zap } from 'lucide-react'
 import InquiryModal from './inquiry-modal'
+import TechSpecsModal from './tech-specs-modal'
 
 const products = [
   {
@@ -67,10 +68,17 @@ const products = [
 export default function ProductsGrid() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedSeries, setSelectedSeries] = useState('')
+  const [specsOpen, setSpecsOpen] = useState(false)
+  const [selectedSpecsSeries, setSelectedSpecsSeries] = useState('')
 
   const handleInquire = (seriesName: string) => {
     setSelectedSeries(seriesName)
     setIsModalOpen(true)
+  }
+
+  const handleTechSpecs = (seriesName: string) => {
+    setSelectedSpecsSeries(seriesName)
+    setSpecsOpen(true)
   }
 
   return (
@@ -194,18 +202,30 @@ export default function ProductsGrid() {
                     ))}
                   </div>
 
-                  {/* Inquire */}
-                  <button
-                    onClick={() => handleInquire(product.name)}
-                    className={`group/btn flex items-center gap-2 text-sm font-semibold tracking-widest uppercase ${textAccent} hover:opacity-80 transition-opacity`}
-                    aria-label={`Inquire about the ${product.name}`}
-                  >
-                    Inquire
-                    <ArrowRight
-                      size={14}
-                      className="group-hover/btn:translate-x-1 transition-transform duration-200"
-                    />
-                  </button>
+                  {/* Buttons */}
+                  <div className="flex items-center gap-3">
+                    {/* Inquire */}
+                    <button
+                      onClick={() => handleInquire(product.name)}
+                      className={`group/btn flex items-center gap-2 text-sm font-semibold tracking-widest uppercase ${textAccent} hover:opacity-80 transition-opacity flex-1`}
+                      aria-label={`Inquire about the ${product.name}`}
+                    >
+                      Inquire
+                      <ArrowRight
+                        size={14}
+                        className="group-hover/btn:translate-x-1 transition-transform duration-200"
+                      />
+                    </button>
+                    {/* Tech Specs */}
+                    <button
+                      onClick={() => handleTechSpecs(product.name)}
+                      className={`group/specs flex items-center gap-2 px-3 py-1.5 rounded border border-[oklch(0.22_0_0)] ${textAccent} hover:bg-[oklch(0.18_0_0)] transition-all text-xs font-semibold tracking-widest uppercase`}
+                      aria-label={`View technical specifications for ${product.name}`}
+                      title="Technical Specifications"
+                    >
+                      <Zap size={12} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Bottom glow line */}
@@ -227,6 +247,13 @@ export default function ProductsGrid() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         defaultSeries={selectedSeries}
+      />
+
+      {/* Tech Specs Modal */}
+      <TechSpecsModal
+        isOpen={specsOpen}
+        onClose={() => setSpecsOpen(false)}
+        series={selectedSpecsSeries}
       />
     </section>
   )

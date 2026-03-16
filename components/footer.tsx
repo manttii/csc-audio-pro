@@ -71,6 +71,14 @@ export default function Footer() {
               over 2,000 mission-critical venues worldwide.
             </p>
 
+            {/* Address */}
+            <div className="text-xs text-muted-foreground leading-relaxed space-y-1 max-w-xs">
+              <p className="font-semibold text-foreground">Headquarters</p>
+              <p>48 Boston Road</p>
+              <p>Leicester, LE4 1AA</p>
+              <p>United Kingdom</p>
+            </div>
+
             {/* Social */}
             <div className="flex items-center gap-3 mt-1">
               {socialLinks.map(({ label, href, Icon }) => (
@@ -113,7 +121,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-[oklch(0.18_0_0)] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-xs tracking-wide">
-            &copy; {new Date().getFullYear()} CSC Audio. All rights reserved.
+            &copy; 2026 CSC Audio. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (

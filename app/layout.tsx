@@ -10,9 +10,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'CSC Audio — Powering the Sound to Perfection',
+  title: 'CSC Audio | Professional Sound Solutions',
   description:
-    'High-Performance Pro-Audio Systems for Mission-Critical Venues. CSC Audio delivers world-class line arrays, subwoofers, and home theater solutions trusted by professionals worldwide.',
+    'Premium touring and installation audio systems.',
   generator: 'v0.app',
   keywords: ['pro audio', 'line array', 'home theater', 'CSC Audio', 'sound systems'],
   icons: {

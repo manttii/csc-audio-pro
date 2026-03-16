@@ -13,6 +13,7 @@ export default function InquiryModal({ isOpen, onClose, defaultSeries }: Inquiry
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     series: defaultSeries || '',
   })
 
@@ -31,7 +32,7 @@ export default function InquiryModal({ isOpen, onClose, defaultSeries }: Inquiry
     setTimeout(() => {
       onClose()
       setSubmitted(false)
-      setFormData({ name: '', email: '', series: defaultSeries || '' })
+      setFormData({ name: '', email: '', phone: '', series: defaultSeries || '' })
     }, 2000)
   }
 
@@ -133,6 +134,23 @@ export default function InquiryModal({ isOpen, onClose, defaultSeries }: Inquiry
                     onChange={handleChange}
                     required
                     placeholder="john@example.com"
+                    className="px-3 py-2.5 rounded bg-[oklch(0.18_0_0)] border border-[oklch(0.22_0_0)] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  />
+                </div>
+
+                {/* Phone */}
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="phone" className="text-xs font-semibold text-foreground uppercase tracking-wide">
+                    Phone Number
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    placeholder="+1 (555) 000-0000"
                     className="px-3 py-2.5 rounded bg-[oklch(0.18_0_0)] border border-[oklch(0.22_0_0)] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   />
                 </div>

@@ -9,7 +9,7 @@ const navLinks = [
   { label: 'About Us',   href: '#about'     },
   { label: 'Solutions',  href: '#solutions' },
   { label: 'Products',   href: '#products'  },
-  { label: 'Contact',    href: '#contact'   },
+  { label: 'Contact',    href: '#contact',  scroll: true },
 ]
 
 export default function Navbar() {
@@ -21,6 +21,17 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+        setMenuOpen(false)
+      }
+    }
+  }
 
   return (
     <header
@@ -52,6 +63,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               className="text-muted-foreground hover:text-foreground text-sm tracking-wider uppercase transition-colors duration-200"
             >
               {link.label}
@@ -63,6 +75,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="#contact"
+            onClick={(e) => handleSmoothScroll(e, '#contact')}
             className="text-sm font-medium tracking-widest uppercase px-5 py-2 rounded bg-primary text-primary-foreground hover:brightness-110 active:scale-95 transition-all duration-200 shadow-[0_0_16px_oklch(0.55_0.24_27/0.45)]"
           >
             Request a Quote
@@ -88,7 +101,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => handleSmoothScroll(e, link.href)}
                 className="text-muted-foreground hover:text-foreground text-sm tracking-wider uppercase py-2 transition-colors"
               >
                 {link.label}
@@ -96,7 +109,7 @@ export default function Navbar() {
             ))}
             <Link
               href="#contact"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
               className="mt-2 text-sm font-medium tracking-widest uppercase px-5 py-2 rounded bg-primary text-primary-foreground hover:brightness-110 transition-all text-center shadow-[0_0_16px_oklch(0.55_0.24_27/0.4)]"
             >
               Request a Quote

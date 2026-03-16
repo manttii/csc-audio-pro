@@ -1,5 +1,9 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import InquiryModal from './inquiry-modal'
 
 const products = [
   {
@@ -61,6 +65,14 @@ const products = [
 ]
 
 export default function ProductsGrid() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedSeries, setSelectedSeries] = useState('')
+
+  const handleInquire = (seriesName: string) => {
+    setSelectedSeries(seriesName)
+    setIsModalOpen(true)
+  }
+
   return (
     <section
       id="products"
@@ -182,12 +194,13 @@ export default function ProductsGrid() {
                     ))}
                   </div>
 
-                  {/* Learn more */}
+                  {/* Inquire */}
                   <button
+                    onClick={() => handleInquire(product.name)}
                     className={`group/btn flex items-center gap-2 text-sm font-semibold tracking-widest uppercase ${textAccent} hover:opacity-80 transition-opacity`}
-                    aria-label={`Learn more about the ${product.name}`}
+                    aria-label={`Inquire about the ${product.name}`}
                   >
-                    Learn More
+                    Inquire
                     <ArrowRight
                       size={14}
                       className="group-hover/btn:translate-x-1 transition-transform duration-200"
@@ -208,6 +221,13 @@ export default function ProductsGrid() {
           })}
         </div>
       </div>
+
+      {/* Inquiry Modal */}
+      <InquiryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultSeries={selectedSeries}
+      />
     </section>
   )
 }

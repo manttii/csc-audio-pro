@@ -1,16 +1,21 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import VenueCarouselModal from './venue-carousel-modal'
+import ConsultationModal from './consultation-modal'
 
 const venues = [
   {
     title:       'Clubs & Bars',
     description:
       'Punishing low-end and crystal-clear mids designed for high-energy nightlife environments. Built to perform night after night at extreme SPLs.',
+    fullDescription:
+      'CSC Audio systems for clubs and bars deliver the raw power and precision needed for high-energy nightlife. Our sonic signature combines chest-hitting bass with pristine mids, crafted to energize dance floors while maintaining clarity for vocals and DJ cues. All systems are rigged-ready and built for nightly punishment.',
     image:       '/images/venue-club.jpg',
     tags:        ['High SPL', 'Rigging Ready', 'RGB DSP'],
-    span:        'col-span-1 md:col-span-2 row-span-1',   // wide card
+    span:        'col-span-1 md:col-span-2 row-span-1',
     accent:      'red',
     imagePos:    'object-center',
   },
@@ -18,6 +23,8 @@ const venues = [
     title:       'Auditoriums',
     description:
       'Even coverage across every seat. Precision-steerable line arrays eliminate reflections and dead spots in challenging acoustic spaces.',
+    fullDescription:
+      'For auditoriums and theaters, CSC Audio provides even, articulate coverage from front row to back. Our precision-steerable line arrays intelligently navigate complex architectural acoustics, eliminating reflections and dead spots. Every seat gets identical intelligibility and impact, whether it\'s orchestral performances, theatre productions, or lectures.',
     image:       '/images/venue-auditorium.jpg',
     tags:        ['Speech Clarity', 'Wide Coverage', 'Low Coloration'],
     span:        'col-span-1 row-span-1',
@@ -28,6 +35,8 @@ const venues = [
     title:       'Live Concerts',
     description:
       'Festival-grade touring systems delivering reference-class sound to crowds of thousands. Sky-high output with no compromise on fidelity.',
+    fullDescription:
+      'CSC Audio touring systems are specified at festivals and large venues worldwide. Festival-grade reliability, sky-high SPL capability, and reference-class transient response make CSC the choice for tours, outdoor festivals, and large-scale productions where audiences expect nothing less than world-class sound.',
     image:       '/images/venue-concert.jpg',
     tags:        ['Festival Grade', 'Long Throw', '143 dB SPL'],
     span:        'col-span-1 row-span-1',
@@ -38,15 +47,31 @@ const venues = [
     title:       'Hotels & Malls',
     description:
       'Architecturally discreet systems that blend into premium interiors while delivering immersive, full-range background and foreground audio.',
+    fullDescription:
+      'For hospitality and commercial spaces, CSC Audio specializes in architecturally integrated systems that seamlessly complement premium interiors. From background ambience to immersive foreground experiences, our discreet installations elevate guest experiences while remaining virtually invisible—until they hear the sound.',
     image:       '/images/venue-hotel.jpg',
     tags:        ['Discreet Install', 'Multi-Zone', 'Voice Evac Ready'],
-    span:        'col-span-1 md:col-span-2 row-span-1',   // wide card
+    span:        'col-span-1 md:col-span-2 row-span-1',
     accent:      'blue',
     imagePos:    'object-center',
   },
 ]
 
 export default function SolutionsGrid() {
+  const [selectedVenue, setSelectedVenue] = useState<typeof venues[0] | null>(null)
+  const [carouselOpen, setCarouselOpen] = useState(false)
+  const [consultationOpen, setConsultationOpen] = useState(false)
+
+  const handleVenueClick = (venue: typeof venues[0]) => {
+    setSelectedVenue(venue)
+    setCarouselOpen(true)
+  }
+
+  const handleConsult = () => {
+    setCarouselOpen(false)
+    setConsultationOpen(true)
+  }
+
   return (
     <section
       id="solutions"
@@ -98,12 +123,20 @@ export default function SolutionsGrid() {
             return (
               <article
                 key={venue.title}
+                onClick={() => handleVenueClick(venue)}
                 className={`group relative flex flex-col justify-end rounded-lg overflow-hidden cursor-pointer ${venue.span}`}
                 style={{
                   border: `1px solid ${borderColor}`,
                 }}
-                role="region"
-                aria-label={venue.title}
+                role="button"
+                tabIndex={0}
+                aria-label={`${venue.title} — click to learn more`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleVenueClick(venue)
+                  }
+                }}
               >
                 {/* Background image */}
                 <div className="absolute inset-0">
@@ -194,6 +227,22 @@ export default function SolutionsGrid() {
           })}
         </div>
       </div>
+
+      {/* Venue Carousel Modal */}
+      {selectedVenue && (
+        <VenueCarouselModal
+          isOpen={carouselOpen}
+          onClose={() => setCarouselOpen(false)}
+          venue={selectedVenue}
+          onConsult={handleConsult}
+        />
+      )}
+
+      {/* Consultation Modal */}
+      <ConsultationModal
+        isOpen={consultationOpen}
+        onClose={() => setConsultationOpen(false)}
+      />
     </section>
   )
 }

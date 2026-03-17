@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import ConsultationModal from './consultation-modal'
 
 const navLinks = [
   { label: 'Home',       href: '#'          },
@@ -15,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [consultationOpen, setConsultationOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -73,13 +75,12 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <Link
-            href="#contact"
-            onClick={(e) => handleSmoothScroll(e, '#contact')}
+          <button
+            onClick={() => setConsultationOpen(true)}
             className="text-sm font-medium tracking-widest uppercase px-5 py-2 rounded bg-primary text-primary-foreground hover:brightness-110 active:scale-95 transition-all duration-200 shadow-[0_0_16px_oklch(0.55_0.24_27/0.45)]"
           >
-            Request a Quote
-          </Link>
+            Book Consultation
+          </button>
         </div>
 
         {/* Mobile toggle */}
@@ -107,16 +108,24 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="#contact"
-              onClick={(e) => handleSmoothScroll(e, '#contact')}
-              className="mt-2 text-sm font-medium tracking-widest uppercase px-5 py-2 rounded bg-primary text-primary-foreground hover:brightness-110 transition-all text-center shadow-[0_0_16px_oklch(0.55_0.24_27/0.4)]"
+            <button
+              onClick={() => {
+                setConsultationOpen(true)
+                setMenuOpen(false)
+              }}
+              className="mt-2 text-sm font-medium tracking-widest uppercase px-5 py-2 rounded bg-primary text-primary-foreground hover:brightness-110 transition-all text-center shadow-[0_0_16px_oklch(0.55_0.24_27/0.4)] w-full"
             >
-              Request a Quote
-            </Link>
+              Book Consultation
+            </button>
           </nav>
         </div>
       )}
+
+      {/* Consultation Modal */}
+      <ConsultationModal
+        isOpen={consultationOpen}
+        onClose={() => setConsultationOpen(false)}
+      />
     </header>
   )
 }

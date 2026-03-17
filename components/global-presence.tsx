@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { MapPin, Phone, Mail, ArrowRight, Headphones } from 'lucide-react'
+import DetailViewModal from './detail-view-modal'
 
 const offices = [
   {
@@ -52,11 +54,19 @@ const accentMap = {
 }
 
 export default function GlobalPresence() {
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [selectedLocation, setSelectedLocation] = useState<typeof offices[0] | null>(null)
+
+  const handleLocationClick = (location: typeof offices[0]) => {
+    setSelectedLocation(location)
+    setDetailOpen(true)
+  }
+
   return (
     <>
       {/* ── GLOBAL PRESENCE SECTION ── */}
       <section
-        id="global"
+        id="locations"
         className="relative py-28 overflow-hidden"
         aria-label="Global Presence"
       >
@@ -107,7 +117,8 @@ export default function GlobalPresence() {
               return (
                 <article
                   key={office.city}
-                  className="group relative rounded-xl p-8 flex flex-col gap-6 transition-all duration-300"
+                  onClick={() => handleLocationClick(office)}
+                  className="group relative rounded-xl p-8 flex flex-col gap-6 transition-all duration-300 cursor-pointer"
                   style={{
                     background: 'oklch(0.10 0 0)',
                     border: `1px solid ${c.border}`,
@@ -199,6 +210,22 @@ export default function GlobalPresence() {
           </div>
         </div>
       </section>
+
+      {/* Detail View Modal */}
+      {selectedLocation && (
+        <DetailViewModal
+          isOpen={detailOpen}
+          onClose={() => setDetailOpen(false)}
+          type="location"
+          data={{
+            name: selectedLocation.city,
+            image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop',
+            address: selectedLocation.address,
+            city: selectedLocation.city,
+            region: selectedLocation.region,
+          }}
+        />
+      )}
 
       {/* ── GLOWING CTA BANNER ── */}
       <section

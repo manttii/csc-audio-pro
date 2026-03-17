@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'CSC Audio | Professional Sound Solutions',
+  title: 'CSC Audio | Elite Sound Systems',
   description:
     'Premium touring and installation audio systems.',
   generator: 'v0.app',

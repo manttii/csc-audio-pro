@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ArrowRight, Zap } from 'lucide-react'
 import InquiryModal from './inquiry-modal'
 import TechSpecsModal from './tech-specs-modal'
+import DetailViewModal from './detail-view-modal'
 
 const products = [
   {
@@ -70,6 +71,8 @@ export default function ProductsGrid() {
   const [selectedSeries, setSelectedSeries] = useState('')
   const [specsOpen, setSpecsOpen] = useState(false)
   const [selectedSpecsSeries, setSelectedSpecsSeries] = useState('')
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
 
   const handleInquire = (seriesName: string) => {
     setSelectedSeries(seriesName)
@@ -79,6 +82,11 @@ export default function ProductsGrid() {
   const handleTechSpecs = (seriesName: string) => {
     setSelectedSpecsSeries(seriesName)
     setSpecsOpen(true)
+  }
+
+  const handleProductClick = (product: typeof products[0]) => {
+    setSelectedProduct(product)
+    setDetailOpen(true)
   }
 
   return (
@@ -134,7 +142,8 @@ export default function ProductsGrid() {
             return (
               <article
                 key={product.name}
-                className="group relative flex flex-col rounded-lg overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                onClick={() => handleProductClick(product)}
+                className="group relative flex flex-col rounded-lg overflow-hidden transition-transform duration-300 hover:-translate-y-1 cursor-pointer"
                 style={{
                   background:
                     'linear-gradient(135deg, oklch(0.12 0 0 / 0.85) 0%, oklch(0.10 0 0 / 0.70) 100%)',
@@ -255,6 +264,21 @@ export default function ProductsGrid() {
         onClose={() => setSpecsOpen(false)}
         series={selectedSpecsSeries}
       />
+
+      {/* Detail View Modal */}
+      {selectedProduct && (
+        <DetailViewModal
+          isOpen={detailOpen}
+          onClose={() => setDetailOpen(false)}
+          type="product"
+          data={{
+            name: selectedProduct.name,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            specs: selectedProduct.specs,
+          }}
+        />
+      )}
     </section>
   )
 }

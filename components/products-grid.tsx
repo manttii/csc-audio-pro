@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Zap } from 'lucide-react'
 import InquiryModal from './inquiry-modal'
@@ -210,6 +211,14 @@ export default function ProductsGrid() {
                       </div>
                     ))}
                   </div>
+
+                  {/* Explore Series Button */}
+                  <Link
+                    href={`/series/${product.name.toLowerCase().split(' ')[0]}`}
+                    className={`block w-full px-4 py-2.5 rounded-lg font-semibold tracking-widest uppercase text-sm bg-primary/10 border border-primary text-primary hover:bg-primary/20 transition-all duration-200 text-center mb-4`}
+                  >
+                    Explore Series
+                  </Link>
 
                   {/* Buttons */}
                   <div className="flex items-center gap-3">

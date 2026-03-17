@@ -3,22 +3,22 @@ import { Twitter, Instagram, Linkedin, Youtube } from 'lucide-react'
 
 const footerLinks = {
   Products: [
-    { label: 'Cello Series',      href: '#' },
-    { label: 'Contrabass Series', href: '#' },
-    { label: 'Harp Series',       href: '#' },
-    { label: 'Signal Processing', href: '#' },
+    { label: 'Cello Series',      href: '/series/cello' },
+    { label: 'Contrabass Series', href: '/series/contrabass' },
+    { label: 'Harp Series',       href: '/series/harp' },
+    { label: 'String Series',     href: '/series/string' },
   ],
   Solutions: [
-    { label: 'Live Events',         href: '#' },
-    { label: 'Fixed Installation',  href: '#' },
-    { label: 'Home Theater',        href: '#' },
-    { label: 'Broadcast & Studio',  href: '#' },
+    { label: 'Live Events',         href: '#solutions' },
+    { label: 'Fixed Installation',  href: '#solutions' },
+    { label: 'Home Theater',        href: '#solutions' },
+    { label: 'Broadcast & Studio',  href: '#solutions' },
   ],
   Company: [
-    { label: 'About CSC',        href: '#' },
-    { label: 'Careers',          href: '#' },
-    { label: 'Press & Media',    href: '#' },
-    { label: 'Distributor Map',  href: '#' },
+    { label: 'About CSC',        href: '/about' },
+    { label: 'Careers',          href: '/careers' },
+    { label: 'Press & Media',    href: '/press' },
+    { label: 'Distributor Map',  href: '/distributors' },
   ],
 }
 
